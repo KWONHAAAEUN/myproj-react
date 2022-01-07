@@ -3,6 +3,7 @@ import Login from 'pages/accounts/Login';
 import Profile from 'pages/accounts/Profile';
 import Components from 'pages/examples/Components';
 import ReviewList from 'pages/reviews/ReviewList';
+import ReviewForm from 'pages/reviews/ReviewForm';
 import { Navigate, Routes, Route } from 'react-router-dom';
 import './App.css';
 
@@ -16,6 +17,7 @@ function App() {
         <Route path="/accounts/profile/" element={<Profile />} />
         <Route path="/reviews" element={<ReviewList />} />
         <Route path="/examples/components/" element={<Components />} />
+        <Route path="/reviews/new/" element={<ReviewForm />} />
       </Routes>
     </div>
   );
