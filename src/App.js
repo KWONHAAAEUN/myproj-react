@@ -3,7 +3,7 @@ import Login from 'pages/accounts/Login';
 import Profile from 'pages/accounts/Profile';
 import ReviewList from 'pages/reviews/ReviewList';
 import { Navigate, Routes, Route } from 'react-router-dom';
-import app from 'App.css';
+import './App.css';
 
 function App() {
   return (
