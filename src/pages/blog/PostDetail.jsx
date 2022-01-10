@@ -39,6 +39,27 @@ function PostDeatil() {
       });
   };
 
+  const deletePost = (deletingPost) => {
+    const url = `http://localhost:8000/blog/api/posts/${postId}/`;
+
+    setLoading(true);
+    setError(null);
+
+    Axios.delete(url)
+      .then(() => {
+        console.log('삭제 성공');
+        setPostList((prevReviewList) =>
+          prevReviewList.filter((post) => post.id !== postId),
+        );
+      })
+      .catch((error) => {
+        setError(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   return (
     <div>
       <h2>Post</h2>
@@ -47,7 +68,7 @@ function PostDeatil() {
       {error && <div>통신 중에 오류가 발생했습니다.</div>}
 
       <div className="">
-        <BlogDetail post={postList} />
+        <BlogDetail post={postList} handleDelete={deletePost} />
       </div>
 
       <hr />

@@ -35,6 +35,28 @@ function PageBlog() {
       });
   };
 
+  const deletePost = (deletingPost) => {
+    const { id: deletedPostId } = deletingPost;
+    const url = `http://localhost:8000/blog/api/posts/${deletedPostId}/`;
+
+    setLoading(true);
+    setError(null);
+
+    Axios.delete(url)
+      .then(() => {
+        console.log('삭제 성공');
+        setPostList((prevReviewList) =>
+          prevReviewList.filter((post) => post.id !== deletedPostId),
+        );
+      })
+      .catch((error) => {
+        setError(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   return (
     <div>
       <h2>Blog List</h2>
@@ -61,6 +83,7 @@ function PageBlog() {
             key={post.id}
             post={post}
             onClick={() => navigate(`/blog/${post.id}/`)}
+            handleDelete={() => deletePost(post)}
           />
         ))}
       </div>
