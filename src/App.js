@@ -18,6 +18,7 @@ function App() {
         <Route path="/reviews" element={<ReviewList />} />
         <Route path="/examples/components/" element={<Components />} />
         <Route path="/reviews/new/" element={<ReviewForm />} />
+        <Route path="/reviews/:reviewId/edit/" element={<ReviewForm />} />
       </Routes>
     </div>
   );
