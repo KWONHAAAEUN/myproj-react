@@ -1,13 +1,17 @@
 import Axios from 'axios';
+import BlogDetail from 'components/blog/BlogDetail';
 import DebugStates from 'components/DebugStates';
+import useFieldValuesBlog from 'hook/useFieldValuesBlog';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import BlogList from 'components/blog/BlogList';
 
-function PageBlog() {
+function PostDeatil() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [postList, setPostList] = useState([]);
+  const [postList, setPostList] = useState({
+    title: '',
+    content: '',
+  });
   const navigate = useNavigate();
 
   const { postId } = useParams();
@@ -20,8 +24,8 @@ function PageBlog() {
     setLoading(true);
     setError(null);
 
-    const url = 'http://localhost:8000/blog/api/posts/';
-    // Promise 객체
+    const url = `http://localhost:8000/blog/api/posts/${postId}/`;
+
     Axios.get(url)
       .then(({ data }) => {
         setPostList(data);
@@ -37,37 +41,19 @@ function PageBlog() {
 
   return (
     <div>
-      <h2>Blog List</h2>
+      <h2>Post</h2>
 
       {loading && <div>Loading ...</div>}
       {error && <div>통신 중에 오류가 발생했습니다.</div>}
 
-      <button
-        onClick={() => refetch()}
-        className="bg-yellow-400 hover:bg-red-400 mr-1"
-      >
-        새로고침
-      </button>
-
-      <button
-        onClick={() => navigate('/blog/new/')}
-        className="bg-blue-400 hover:bg-slate-400"
-      >
-        새 포스팅 작성
-      </button>
-      <div className="hover:cursor-pointer">
-        {postList.map((post) => (
-          <BlogList
-            key={post.id}
-            post={post}
-            onClick={() => navigate(`/blog/${post.id}/`)}
-          />
-        ))}
+      <div className="">
+        <BlogDetail post={postList} />
       </div>
+
       <hr />
       <DebugStates loading={loading} error={error} postList={postList} />
     </div>
   );
 }
 
-export default PageBlog;
+export default PostDeatil;
