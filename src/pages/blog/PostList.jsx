@@ -36,8 +36,8 @@ function PageBlog() {
   };
 
   const deletePost = (deletingPost) => {
-    const { id: deletedPostId } = deletingPost;
-    const url = `http://localhost:8000/blog/api/posts/${deletedPostId}/`;
+    const { id: deletingPostId } = deletingPost;
+    const url = `http://localhost:8000/blog/api/posts/${deletingPostId}/`;
 
     setLoading(true);
     setError(null);
@@ -46,7 +46,7 @@ function PageBlog() {
       .then(() => {
         console.log('삭제 성공');
         setPostList((prevReviewList) =>
-          prevReviewList.filter((post) => post.id !== deletedPostId),
+          prevReviewList.filter((post) => post.id !== deletingPostId),
         );
       })
       .catch((error) => {
@@ -60,17 +60,14 @@ function PageBlog() {
   return (
     <div>
       <h2>Blog List</h2>
-
       {loading && <div>Loading ...</div>}
       {error && <div>통신 중에 오류가 발생했습니다.</div>}
-
       <button
         onClick={() => refetch()}
         className="bg-yellow-400 hover:bg-red-400 mr-1"
       >
         새로고침
       </button>
-
       <button
         onClick={() => navigate('/blog/new/')}
         className="bg-blue-400 hover:bg-slate-400"
@@ -83,11 +80,15 @@ function PageBlog() {
             key={post.id}
             post={post}
             onClick={() => navigate(`/blog/${post.id}/`)}
+            handleEdit={() => navigate(`/blog/${post.id}/edit/`)}
             handleDelete={() => deletePost(post)}
           />
         ))}
       </div>
       <hr />
+      <div className="text-xs">
+        https://tailwindcomponents.com/component/testimonial-card
+      </div>
       <DebugStates loading={loading} error={error} postList={postList} />
     </div>
   );

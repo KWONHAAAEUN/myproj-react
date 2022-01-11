@@ -19,7 +19,7 @@ function TopNav() {
         <li>
           <MyLink to="/blog/">블로그</MyLink>
         </li>
-        <li>
+        {/* <li>
           <MyLink to="/examples/clock/">시계</MyLink>
         </li>
         <li>
@@ -33,7 +33,7 @@ function TopNav() {
         </li>
         <li>
           <MyLink to="/examples/context-api-2/">Context Api2</MyLink>
-        </li>
+        </li> */}
       </ul>
     </div>
   );
