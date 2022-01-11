@@ -1,9 +1,11 @@
 import useFieldValues from 'hook/useFieldValues';
-import Axios from 'axios';
+// import Axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import DebugStates from 'components/DebugStates';
 import ReviewForm from 'components/ReviewForm';
+// import { API_HOST } from 'Constants';
+import { axiosInstance } from 'api/base';
 
 function PageReviewForm() {
   // 상탯값 정의. 훅 호출
@@ -20,6 +22,8 @@ function PageReviewForm() {
       score: 5,
       content: '',
     });
+
+  const [errorMessages, setErrorMessages] = useState({});
 
   // 변화되는 값에 적용하기 위함
   // 어떤 값이 변경되면 지정된 함수를 호출하겠다
@@ -46,9 +50,9 @@ function PageReviewForm() {
       setLoading(true);
       setError(null);
 
-      const url = `http://127.0.0.1:8000/shop/api/reviews/${reviewId}/`;
+      const url = `/shop/api/reviews/${reviewId}/`;
       try {
-        const response = await Axios.get(url);
+        const response = await axiosInstance.get(url);
         setFieldValues(response.data);
       } catch (e) {
         setError(e);
@@ -63,21 +67,24 @@ function PageReviewForm() {
   const saveReview = async () => {
     setLoading(true);
     setError(null);
+    setErrorMessages({});
 
     const url = !reviewId
-      ? 'http://127.0.0.1:8000/shop/api/reviews/'
-      : `http://127.0.0.1:8000/shop/api/reviews/${reviewId}/`;
+      ? `/shop/api/reviews/`
+      : `/shop/api/reviews/${reviewId}/`;
 
     try {
       if (!reviewId) {
-        await Axios.post(url, fieldValues);
+        await axiosInstance.post(url, fieldValues);
       } else {
-        await Axios.patch(url, fieldValues);
+        await axiosInstance.patch(url, fieldValues);
       }
       navigate('/reviews/');
     } catch (e) {
       setError(e);
       console.error(e);
+
+      setErrorMessages(e.response.data);
     }
 
     setLoading(false);
@@ -107,11 +114,16 @@ function PageReviewForm() {
       </h2>
       <ReviewForm
         fieldValues={fieldValues}
+        errorMessages={errorMessages}
         handleFieldChange={handleFieldChange}
         handleSubmit={saveReview}
         disabled={loading}
       />
-      <DebugStates reviewId={reviewId} fieldValues={fieldValues} />
+      <DebugStates
+        reviewId={reviewId}
+        fieldValues={fieldValues}
+        errorMessages={errorMessages}
+      />
     </div>
   );
 }
