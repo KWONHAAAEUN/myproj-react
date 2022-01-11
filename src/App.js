@@ -10,8 +10,12 @@ import PostList from 'pages/blog/PostList';
 import PostForm from 'pages/blog/PostForm';
 import PostDetail from 'pages/blog/PostDetail';
 import Clock from 'pages/examples/Clock';
+import useWindowWidth from 'hook/useWindowWidth';
+import CssModlue from 'pages/examples/CssModule';
+import CssInJs from 'pages/examples/CssInJs';
 
 function App() {
+  const windowWidth = useWindowWidth();
   return (
     <>
       <div className="app">
@@ -28,8 +32,12 @@ function App() {
           <Route path="/blog/:postId/" element={<PostDetail />} />
           <Route path="/blog/new/" element={<PostForm />} />
           <Route path="/blog/:postId/edit/" element={<PostForm />} />
+          <Route path="/examples/css-module" element={<CssModlue />} />
+          <Route path="/examples/css-in-js" element={<CssInJs />} />
         </Routes>
       </div>
+      <hr />
+      윈도우 가로크기 : {windowWidth}px
       <Routes>
         <Route path="/examples/clock/" element={<Clock />} />
       </Routes>

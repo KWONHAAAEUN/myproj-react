@@ -1,0 +1,16 @@
+.css-module {
+  background-color: yellow;
+  color: green;
+}
+
+.css-module h2 {
+  color: black;
+}
+
+.css-module .content {
+  background-color: orange;
+}
+
+.css-module .date {
+  background-color: lightblue;
+}
