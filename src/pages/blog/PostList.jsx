@@ -3,6 +3,7 @@ import DebugStates from 'components/DebugStates';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import BlogList from 'components/blog/BlogList';
+import { axiosInstance } from 'api/base';
 
 function PageBlog() {
   const [loading, setLoading] = useState(false);
@@ -20,9 +21,10 @@ function PageBlog() {
     setLoading(true);
     setError(null);
 
-    const url = 'http://localhost:8000/blog/api/posts/';
+    const url = '/blog/api/posts/';
     // Promise 객체
-    Axios.get(url)
+    axiosInstance
+      .get(url)
       .then(({ data }) => {
         setPostList(data);
       })
@@ -37,12 +39,13 @@ function PageBlog() {
 
   const deletePost = (deletingPost) => {
     const { id: deletingPostId } = deletingPost;
-    const url = `http://localhost:8000/blog/api/posts/${deletingPostId}/`;
+    const url = `/blog/api/posts/${deletingPostId}/`;
 
     setLoading(true);
     setError(null);
 
-    Axios.delete(url)
+    axiosInstance
+      .delete(url)
       .then(() => {
         console.log('삭제 성공');
         setPostList((prevReviewList) =>

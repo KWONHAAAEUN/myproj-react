@@ -4,6 +4,7 @@ import DebugStates from 'components/DebugStates';
 import useFieldValuesBlog from 'hook/useFieldValuesBlog';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { axiosInstance } from 'api/base';
 
 function PostDeatil() {
   const [loading, setLoading] = useState(false);
@@ -24,9 +25,10 @@ function PostDeatil() {
     setLoading(true);
     setError(null);
 
-    const url = `http://localhost:8000/blog/api/posts/${postId}/`;
+    const url = `/blog/api/posts/${postId}/`;
 
-    Axios.get(url)
+    axiosInstance
+      .get(url)
       .then(({ data }) => {
         setPostList(data);
       })
