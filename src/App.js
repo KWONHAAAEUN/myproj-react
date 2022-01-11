@@ -13,6 +13,8 @@ import Clock from 'pages/examples/Clock';
 import useWindowWidth from 'hook/useWindowWidth';
 import CssModlue from 'pages/examples/CssModule';
 import CssInJs from 'pages/examples/CssInJs';
+import ContextApiSample from 'pages/examples/ContextApiSample';
+import ContextApiSample2 from 'pages/examples/ContextApiSample2';
 
 function App() {
   const windowWidth = useWindowWidth();
@@ -34,6 +36,11 @@ function App() {
           <Route path="/blog/:postId/edit/" element={<PostForm />} />
           <Route path="/examples/css-module" element={<CssModlue />} />
           <Route path="/examples/css-in-js" element={<CssInJs />} />
+          <Route path="/examples/context-api" element={<ContextApiSample />} />
+          <Route
+            path="/examples/context-api-2"
+            element={<ContextApiSample2 />}
+          />
         </Routes>
       </div>
       <hr />
