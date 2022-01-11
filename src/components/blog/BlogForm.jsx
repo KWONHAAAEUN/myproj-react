@@ -2,13 +2,7 @@
 // handleFieldChange: 각 필드 값이 변화 시에 호출
 // handleSubmit: 인자 없는 함수 Submit 시에 호출
 
-function ReviewForm({
-  fieldValues,
-  errorMessages,
-  handleFieldChange,
-  handleSubmit,
-  loading,
-}) {
+function BlogForm({ fieldValues, handleFieldChange, handleSubmit, loading }) {
   const handleClickedSubmitButton = () => {
     if (handleSubmit) {
       handleSubmit();
@@ -21,21 +15,13 @@ function ReviewForm({
     <div>
       {loading && 'Loading ...'}
       <div>
-        <select
-          name="score"
-          value={fieldValues.score}
+        <input
+          name="title"
+          value={fieldValues.title}
           onChange={handleFieldChange}
           className="bg-gray-100 border border-gray-400"
           disabled={loading}
-        >
-          <option>0</option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-        <div className="text-red-400">{errorMessages.score}</div>
+        />
       </div>
       <div>
         <textarea
@@ -45,7 +31,6 @@ function ReviewForm({
           className="bg-gray-100 border border-gray-400"
           disabled={loading}
         />
-        <div className="text-red-400">{errorMessages.content}</div>
       </div>
       <div>
         <button
@@ -53,11 +38,11 @@ function ReviewForm({
           onClick={() => handleClickedSubmitButton()}
           disabled={loading}
         >
-          {loading && '로딩 아이콘'}내 마음 속에 저장
+          {loading && '로딩 아이콘'}저장
         </button>
       </div>
     </div>
   );
 }
 
-export default ReviewForm;
+export default BlogForm;
