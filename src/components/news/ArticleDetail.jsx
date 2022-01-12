@@ -1,10 +1,15 @@
 import { useApiAxios } from 'api/base';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
 function ArticleDetail({ articleId }) {
-  const [{ data: article, loading, error }] = useApiAxios(
+  const [{ data: article, loading, error }, refetch] = useApiAxios(
     `/news/api/articles/${articleId}/`,
   );
+  useEffect(() => {
+    refetch();
+  }, []);
+
   return (
     <div>
       {loading && '로딩 중..'}
