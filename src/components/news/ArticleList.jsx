@@ -1,12 +1,12 @@
-import useAxios from 'axios-hooks';
+import { useApiAxios } from 'api/base';
 import DebugStates from 'components/DebugStates';
 import ArticleSummary from './ArticleSummary';
 
 function ArticleList() {
   // 지원 되는 것을 개별적으로 뽑아내기 위해 {}
   // 첫 값은 상탯값 두 번째는 refetch
-  const [{ data: articleList, loading, error }, refetch] = useAxios(
-    'http://localhost:8000/news/api/articles/',
+  const [{ data: articleList, loading, error }, refetch] = useApiAxios(
+    '/news/api/articles/',
   );
 
   return (
