@@ -9,6 +9,7 @@ function ArticleList() {
   // 첫 값은 상탯값 두 번째는 refetch
   const [{ data: articleList, loading, error }, refetch] = useApiAxios(
     '/news/api/articles/',
+    { manual: true },
   );
 
   useEffect(() => {
