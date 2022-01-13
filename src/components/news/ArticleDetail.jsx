@@ -26,7 +26,7 @@ function ArticleDetail({ articleId }) {
       // REST API 에서는 DELETE 요청에 대한 응답이 없다
       deleteArticle().then(() => {
         navigate('/news/');
-        toast.success('🦄 Wow so easy!', {
+        toast.success('🦄 삭제 되었습니다!', {
           position: 'top-center',
           autoClose: 5000,
           hideProgressBar: false,
