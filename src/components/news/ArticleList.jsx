@@ -23,7 +23,10 @@ function ArticleList() {
       {articleList && (
         <div className="flex flex-wrap">
           {articleList.map((article) => (
-            <div key={article.id} className="w-full md:w-1/2 xl:w-1/3 px-4">
+            <div
+              key={article.id}
+              className="w-full md:w-1/2 xl:w-1/3 px-4 transition-transform hover:-translate-y-5 duration-300"
+            >
               <ArticleSummary article={article} />
             </div>
           ))}
