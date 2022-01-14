@@ -19,6 +19,7 @@ import PageNewsIndex from 'pages/news/PageNewsIndex';
 import PageNewsArticleDetail from 'pages/news/PageNewsArticleDetail';
 import PageNewsArticleForm from 'pages/news/PageNewsArticleForm';
 import PageLolList from 'pages/lol/PageLolList';
+import PageLolDetail from 'pages/lol/PageLolDetail';
 
 function App() {
   const windowWidth = useWindowWidth();
@@ -49,6 +50,7 @@ function App() {
           />
           <Route path="/news/:articleId" element={<PageNewsArticleDetail />} />
           <Route path="/lol/" element={<PageLolList />} />
+          <Route path="/lol/:postId/" element={<PageLolDetail />} />
           <Route
             path="/examples/context-api-2"
             element={<ContextApiSample2 />}
