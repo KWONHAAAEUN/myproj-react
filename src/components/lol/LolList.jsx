@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useApiAxios } from 'api/base';
 import DebugStates from 'components/DebugStates';
 import LolSummary from './LolSummary';
+import { ToastContainer } from 'react-toastify';
 
 function LolList() {
   const [{ data: postList, loading, error }, refetch] = useApiAxios(
@@ -15,6 +16,7 @@ function LolList() {
 
   return (
     <div className="my-5">
+      <ToastContainer />
       {loading && 'Loading..'}
       {error && '로딩 중에 에러 발생'}
       {postList && (
