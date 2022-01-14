@@ -25,7 +25,7 @@ function LolDetail({ postId }) {
     if (window.confirm('정말 챔피언을 처치하시겠습니까?ಥ_ಥ')) {
       deletePost().then(() => {
         navigate('/lol/');
-        toast.success(`${post.champion}: 끄앙o(TヘTo)`, {
+        toast.success(`${post.champion}: 으앙 쥬금 🦴(TヘT🦴)`, {
           position: 'top-center',
           autoClose: 5000,
           hideProgressBar: false,

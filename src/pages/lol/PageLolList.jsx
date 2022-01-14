@@ -16,7 +16,9 @@ function PageLolList() {
             >
               생성
             </span>
-            <span class="inline-flex px-2">새로운 챔피언을 등록해주세요!</span>
+            <span class="inline-flex px-2">
+              새로운 챔피언을 등록해주세요!🧚
+            </span>
           </div>
         </div>
       </div>
