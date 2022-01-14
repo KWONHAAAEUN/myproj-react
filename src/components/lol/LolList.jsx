@@ -20,11 +20,11 @@ function LolList() {
       {loading && 'Loading..'}
       {error && '로딩 중에 에러 발생'}
       {postList && (
-        <div className="flex felx-wrap">
+        <div>
           {postList.map((post) => (
             <div
               key={post.id}
-              className="w-full md:w-1/3 xl:w-1/3 px-4 transition-transform hover:-translate-y-5 duration-300"
+              className=" w-full transition-transform hover:-translate-y-5 duration-300"
             >
               <LolSummary post={post} />
             </div>

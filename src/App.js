@@ -45,15 +45,14 @@ function App() {
           <Route path="/examples/context-api" element={<ContextApiSample />} />
           <Route path="/news/" element={<PageNewsIndex />} />
           <Route path="/news/new" element={<PageNewsArticleForm />} />
+          <Route path="/lol/:postId/" element={<PageLolDetail />} />
+          <Route path="/lol/new/" element={<PageLolForm />} />
+          <Route path="/lol/:postId/edit" element={<PageLolForm />} />
           <Route
             path="/news/:articleId/edit"
             element={<PageNewsArticleForm />}
           />
           <Route path="/news/:articleId" element={<PageNewsArticleDetail />} />
-          <Route path="/lol/" element={<PageLolList />} />
-          <Route path="/lol/:postId/" element={<PageLolDetail />} />
-          <Route path="/lol/new/" element={<PageLolForm />} />
-          <Route path="/lol/:postId/edit" element={<PageLolForm />} />
           <Route
             path="/examples/context-api-2"
             element={<ContextApiSample2 />}
@@ -64,6 +63,8 @@ function App() {
       윈도우 가로크기 : {windowWidth}px */}
       <Routes>
         <Route path="/examples/clock/" element={<Clock />} />
+        <Route path="/lol/" element={<PageLolList />} />
+        />
       </Routes>
     </>
   );
