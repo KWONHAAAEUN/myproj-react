@@ -53,6 +53,7 @@ function App() {
           <Route path="/lol/" element={<PageLolList />} />
           <Route path="/lol/:postId/" element={<PageLolDetail />} />
           <Route path="/lol/new/" element={<PageLolForm />} />
+          <Route path="/lol/:postId/edit" element={<PageLolForm />} />
           <Route
             path="/examples/context-api-2"
             element={<ContextApiSample2 />}

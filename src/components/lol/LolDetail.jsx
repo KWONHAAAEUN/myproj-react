@@ -67,6 +67,9 @@ function LolDetail({ postId }) {
         <Link to="/lol/" className="hover:text-blue-400">
           목록으로
         </Link>
+        <Link to={`/lol/${postId}/edit`} className="hover:text-blue-400">
+          수정하기
+        </Link>
         <button
           disabled={deleteLoading}
           onClick={handleDelete}
