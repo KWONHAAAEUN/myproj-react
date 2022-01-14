@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 
-function useFieldValuesBlog(initialVlaues) {
-  const [fieldValues, setFieldValues] = useState(initialVlaues);
+function useFieldValuesBlog(initialValues) {
+  const [fieldValues, setFieldValues] = useState(initialValues);
 
   // useCallback: 함수 객체를 생성할 때, 의존성이 걸린 값이 변경시에만 함수를 재생성
   const handleFieldChange = useCallback((e) => {
@@ -23,7 +23,7 @@ function useFieldValuesBlog(initialVlaues) {
 
   // 필드 초기화 해주는 부분
   const clearFieldValues = useCallback(() => {
-    setFieldValues(initialVlaues);
+    setFieldValues(initialValues);
   }, []);
 
   // {}로 했으니 오브젝트로 받겠다는 뜻 -> 필요한 경우 받을 때도 오브젝트로 받아야 한다

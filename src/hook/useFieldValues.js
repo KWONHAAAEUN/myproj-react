@@ -1,18 +1,18 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-function useFieldValues(initialVlaues) {
-  const [fieldValues, setFieldValues] = useState(initialVlaues);
+function useFieldValues(initialValues) {
+  const [fieldValues, setFieldValues] = useState(initialValues);
 
   // useCallback: 함수 객체를 생성할 때, 의존성이 걸린 값이 변경시에만 함수를 재생성
   const handleFieldChange = useCallback((e) => {
-    const { name, value } = e.target;
+    const { name, value, files } = e.target;
     // name은 식별자 value는 값
 
     // value가 바뀌었을 때 받아오기 위해
     setFieldValues((prevFieldValues) => {
       return {
         ...prevFieldValues,
-        [name]: value,
+        [name]: (files && Array.from(files)) || value,
       };
     });
   }, []);
@@ -23,8 +23,13 @@ function useFieldValues(initialVlaues) {
 
   // 필드 초기화 해주는 부분
   const clearFieldValues = useCallback(() => {
-    setFieldValues(initialVlaues);
+    setFieldValues(initialValues);
   }, []);
+
+  // initialValues 속성값이 변경되면 fieldValues를 초기화합니다.
+  useEffect(() => {
+    setFieldValues(initialValues);
+  }, [initialValues]);
 
   // {}로 했으니 오브젝트로 받겠다는 뜻 -> 필요한 경우 받을 때도 오브젝트로 받아야 한다
   return { fieldValues, handleFieldChange, clearFieldValues, setFieldValues };

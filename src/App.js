@@ -17,6 +17,10 @@ import ContextApiSample from 'pages/examples/ContextApiSample';
 import ContextApiSample2 from 'pages/examples/ContextApiSample2';
 import PageNewsIndex from 'pages/news/PageNewsIndex';
 import PageNewsArticleDetail from 'pages/news/PageNewsArticleDetail';
+import PageNewsArticleForm from 'pages/news/PageNewsArticleForm';
+import PageLolList from 'pages/lol/PageLolList';
+import PageLolDetail from 'pages/lol/PageLolDetail';
+import PageLolForm from 'pages/lol/PageLolForm';
 
 function App() {
   const windowWidth = useWindowWidth();
@@ -40,6 +44,14 @@ function App() {
           <Route path="/examples/css-in-js" element={<CssInJs />} />
           <Route path="/examples/context-api" element={<ContextApiSample />} />
           <Route path="/news/" element={<PageNewsIndex />} />
+          <Route path="/news/new" element={<PageNewsArticleForm />} />
+          <Route path="/lol/:postId/" element={<PageLolDetail />} />
+          <Route path="/lol/new/" element={<PageLolForm />} />
+          <Route path="/lol/:postId/edit" element={<PageLolForm />} />
+          <Route
+            path="/news/:articleId/edit"
+            element={<PageNewsArticleForm />}
+          />
           <Route path="/news/:articleId" element={<PageNewsArticleDetail />} />
           <Route
             path="/examples/context-api-2"
@@ -51,6 +63,8 @@ function App() {
       윈도우 가로크기 : {windowWidth}px */}
       <Routes>
         <Route path="/examples/clock/" element={<Clock />} />
+        <Route path="/lol/" element={<PageLolList />} />
+        />
       </Routes>
     </>
   );
