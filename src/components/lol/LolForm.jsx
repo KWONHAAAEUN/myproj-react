@@ -7,7 +7,7 @@ import LoadingIndicator from 'components/LoadingIndicator';
 import Button from 'components/Button';
 import DebugStates from 'components/DebugStates';
 
-const INIT_FIELD_VALUES = { champion: '', role: '', story: '' };
+const INIT_FIELD_VALUES = { champion: '', role: '암살자', story: '' };
 
 function LolForm({ postId, handleDidSave }) {
   const [{ data: post, loading: getLoading, error: getError }] = useApiAxios(
@@ -62,7 +62,7 @@ function LolForm({ postId, handleDidSave }) {
   console.log(fieldValues.champion);
   return (
     <div>
-      <H2>Post Form</H2>
+      <H2>새로운 챔피언 등록</H2>
 
       {saveLoading && <LoadingIndicator>저장 중..</LoadingIndicator>}
       {saveError &&
@@ -84,21 +84,19 @@ function LolForm({ postId, handleDidSave }) {
           ))}
         </div>
 
-        <div className="my-3">
-          <h2>챔피언 역할</h2>
-          <input
-            name="role"
-            value={fieldValues.role}
-            onChange={handleFieldChange}
-            type="text"
-            className="p-1 bg-gray-100 w-full outline-none focus:border focus:border-gray-400 focus:border-dashed"
-          />
-          {saveErrorMessages?.role?.map((message, index) => (
-            <p key={index} className="text-xs text-red-400">
-              {message}
-            </p>
-          ))}
-        </div>
+        <h2 className="mb-1">챔피언 역할</h2>
+        <select
+          name="role"
+          onChange={handleFieldChange}
+          value={fieldValues.role}
+        >
+          <option>암살자</option>
+          <option>마법사</option>
+          <option>원거리딜러</option>
+          <option>서포터</option>
+          <option>탱커</option>
+          <option>전사</option>
+        </select>
 
         <div className="my-3">
           <h2>챔피언 스토리</h2>
