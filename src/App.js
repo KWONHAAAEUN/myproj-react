@@ -1,6 +1,6 @@
 import TopNav from 'components/TopNav';
-import Login from 'pages/accounts/Login';
-import Profile from 'pages/accounts/Profile';
+import PageLogin from 'pages/accounts/PageLogin';
+import PageProfile from 'pages/accounts/PageProfile';
 import Components from 'pages/examples/Components';
 import ReviewList from 'pages/reviews/ReviewList';
 import ReviewForm from 'pages/reviews/ReviewForm';
@@ -30,8 +30,8 @@ function App() {
         <TopNav />
         <Routes>
           <Route path="/" element={<Navigate to="/reviews/" />} />
-          <Route path="/accounts/login/" element={<Login />} />
-          <Route path="/accounts/profile/" element={<Profile />} />
+          <Route path="/accounts/login/" element={<PageLogin />} />
+          <Route path="/accounts/profile/" element={<PageProfile />} />
           <Route path="/reviews" element={<ReviewList />} />
           <Route path="/examples/components/" element={<Components />} />
           <Route path="/reviews/new/" element={<ReviewForm />} />
