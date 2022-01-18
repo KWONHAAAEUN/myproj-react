@@ -1,20 +1,36 @@
+import ArticleSummary from './ArticleSummary';
 import { useApiAxios } from 'api/base';
 import DebugStates from 'components/DebugStates';
 import { useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
-import ArticleSummary from './ArticleSummary';
+import useAuth from 'hook/useAuth';
 
 function ArticleList() {
+  const [auth] = useAuth();
   // 지원 되는 것을 개별적으로 뽑아내기 위해 {}
   // 첫 값은 상탯값 두 번째는 refetch
   const [{ data: articleList, loading, error }, refetch] = useApiAxios(
-    '/news/api/articles/',
+    {
+      url: '/news/api/articles/',
+      method: 'GET',
+      // 방법 2)
+      headers: {
+        Authorization: `Bearer ${auth.access}`,
+      },
+    },
     { manual: true },
   );
 
   useEffect(() => {
+    // if (auth.isLoggedIn) {}
+    // 방법 1)
+    // refetch({
+    //   headers: {
+    //     Authorization: `Bearer ${auth.access}`,
+    //   },
+    // });
     refetch();
-  }, []);
+  }, [auth]);
 
   return (
     <div className="my-5">
