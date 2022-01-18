@@ -4,11 +4,19 @@ import { useEffect } from 'react';
 import LoadingIndicator from 'components/LoadingIndicator';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import useAuth from 'hook/useAuth';
 
 function ArticleDetail({ articleId }) {
+  const [auth] = useAuth();
   const navigate = useNavigate();
   const [{ data: article, loading, error }, refetch] = useApiAxios(
-    `/news/api/articles/${articleId}/`,
+    {
+      url: `/news/api/articles/${articleId}/`,
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${auth.access}`,
+      },
+    },
     { manual: true },
   );
 
@@ -17,6 +25,9 @@ function ArticleDetail({ articleId }) {
       {
         url: `/news/api/articles/${articleId}/`,
         method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${auth.access}`,
+        },
       },
       { manual: true },
     );

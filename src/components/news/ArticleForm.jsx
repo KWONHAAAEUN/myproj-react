@@ -6,17 +6,25 @@ import LoadingIndicator from 'components/LoadingIndicator';
 import useFieldValues from 'hook/useFieldValues';
 import { useApiAxios } from 'api/base';
 import { useEffect } from 'react';
+import useAuth from 'hook/useAuth';
 
 // !articleId : 생성
 // articleId : 수정
 const INIT_FIELD_VALUES = { title: '', content: '' };
 
 function ArticleForm({ articleId, handleDidSave }) {
+  const [auth] = useAuth();
   // articleId가 있을 때만 조회
   // articleId가 있을 때 호출이라는 것은 manual을 거짓으로 둬야 자동으로 조회
   // !articleId 일 때는 true(manual은 자동, 수동 설정)
   const [{ data: article, loading: getLoading, error: getError }] = useApiAxios(
-    `news/api/articles/${articleId}/`,
+    {
+      url: `news/api/articles/${articleId}/`,
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${auth.access}`,
+      },
+    },
     {
       manual: !articleId,
     },
@@ -35,6 +43,9 @@ function ArticleForm({ articleId, handleDidSave }) {
         ? '/news/api/articles/'
         : `/news/api/articles/${articleId}/`,
       method: !articleId ? 'POST' : 'PUT',
+      headers: {
+        Authorization: `Bearer ${auth.access}`,
+      },
     },
     { manual: true },
   );
@@ -111,7 +122,7 @@ function ArticleForm({ articleId, handleDidSave }) {
 
       {saveLoading && <LoadingIndicator>저장 중..</LoadingIndicator>}
       {saveError &&
-        `저장 중 에러가 발생했습니다 (${saveError.response.status} ${saveError.response.statusText})`}
+        `저장 중 에러가 발생했습니다 (${saveError.response?.status} ${saveError.response.statusText})`}
       {/* 에러의 종류가 뭔지 상태 코드를 보여주는 기능이 있다 */}
 
       <form onSubmit={handleSubmit}>
