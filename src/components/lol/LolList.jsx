@@ -5,20 +5,27 @@ import LolSummary from './LolSummary';
 import { ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import useAuth from 'hook/useAuth';
 
 function LolList() {
+  const [auth] = useAuth();
   const navigate = useNavigate();
   const [query, setQuery] = useState();
 
   const [{ data: postList, loading, error }, refetch] = useApiAxios(
-    `lol/api/posts/${query ? '?query=' + query : ''}`,
-
+    {
+      url: `lol/api/posts/${query ? '?query=' + query : ''}`,
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${auth.access}`,
+      },
+    },
     { manual: true },
   );
 
   useEffect(() => {
     refetch();
-  }, []);
+  }, [auth]);
 
   const getQuery = (e) => {
     const { value } = e.target;

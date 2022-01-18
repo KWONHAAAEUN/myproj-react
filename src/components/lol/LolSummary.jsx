@@ -17,6 +17,7 @@ function LolSummary({ post }) {
             <Link to={`/lol/${post.id}/`}>{post.story.slice(0, 100)}...</Link>
           </p>
         </div>
+        <p>by {post.author.username}</p>
       </div>
     </div>
   );

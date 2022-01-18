@@ -4,11 +4,19 @@ import { useEffect } from 'react';
 import LoadingIndicator from 'components/LoadingIndicator';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import useAuth from 'hook/useAuth';
 
 function LolDetail({ postId }) {
+  const [auth] = useAuth();
   const navigate = useNavigate();
   const [{ data: post, loading, error }, refetch] = useApiAxios(
-    `/lol/api/posts/${postId}`,
+    {
+      url: `/lol/api/posts/${postId}`,
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${auth.access}`,
+      },
+    },
     { manual: true },
   );
 
@@ -17,6 +25,9 @@ function LolDetail({ postId }) {
       {
         url: `/lol/api/posts/${postId}/`,
         method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${auth.access}`,
+        },
       },
       { manual: true },
     );
@@ -60,6 +71,7 @@ function LolDetail({ postId }) {
               </p>
             ))}
           </div>
+          <p>by {post.author.username}</p>
         </>
       )}
       <hr className="my-3" />

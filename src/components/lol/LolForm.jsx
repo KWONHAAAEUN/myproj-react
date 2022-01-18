@@ -6,12 +6,20 @@ import H2 from 'components/H2';
 import LoadingIndicator from 'components/LoadingIndicator';
 import Button from 'components/Button';
 import DebugStates from 'components/DebugStates';
+import useAuth from 'hook/useAuth';
 
 const INIT_FIELD_VALUES = { champion: '', role: '암살자', story: '' };
 
 function LolForm({ postId, handleDidSave }) {
+  const [auth] = useAuth();
   const [{ data: post, loading: getLoading, error: getError }] = useApiAxios(
-    `lol/api/posts/${postId}`,
+    {
+      url: `lol/api/posts/${postId}`,
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${auth.access}`,
+      },
+    },
     { manual: !postId },
   );
   // 위 loading,error 와 다르게 구별하기 위해 서로 이름을 지정해줬다
@@ -24,6 +32,9 @@ function LolForm({ postId, handleDidSave }) {
     {
       url: !postId ? 'lol/api/posts/' : `/lol/api/posts/${postId}/`,
       method: !postId ? 'POST' : 'PUT',
+      headers: {
+        Authorization: `Bearer ${auth.access}`,
+      },
     },
     { manual: true },
   );
@@ -66,7 +77,7 @@ function LolForm({ postId, handleDidSave }) {
 
       {saveLoading && <LoadingIndicator>저장 중..</LoadingIndicator>}
       {saveError &&
-        `저장 중 에러가 발생했습니다 (${saveError.response.status} ${saveError.response.statusText})`}
+        `저장 중 에러가 발생했습니다 (${saveError.response?.status} ${saveError.response?.statusText})`}
       <form onSubmit={handleSubmit}>
         <div className="my-3">
           <h2>챔피언 이름</h2>
