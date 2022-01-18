@@ -21,6 +21,7 @@ import PageNewsArticleForm from 'pages/news/PageNewsArticleForm';
 import PageLolList from 'pages/lol/PageLolList';
 import PageLolDetail from 'pages/lol/PageLolDetail';
 import PageLolForm from 'pages/lol/PageLolForm';
+import PageSignup from 'pages/accounts/PageSignup';
 
 function App() {
   const windowWidth = useWindowWidth();
@@ -48,6 +49,7 @@ function App() {
           <Route path="/lol/:postId/" element={<PageLolDetail />} />
           <Route path="/lol/new/" element={<PageLolForm />} />
           <Route path="/lol/:postId/edit" element={<PageLolForm />} />
+          <Route path="/accounts/signup/" element={<PageSignup />} />
           <Route
             path="/news/:articleId/edit"
             element={<PageNewsArticleForm />}
