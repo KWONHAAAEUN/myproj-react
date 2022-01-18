@@ -84,6 +84,7 @@ function ArticleDetail({ articleId }) {
               </p>
             ))}
           </div>
+          <p>by {article.author.username}</p>
         </>
       )}
       <hr className="my-3" />
