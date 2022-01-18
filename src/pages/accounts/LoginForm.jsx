@@ -11,7 +11,7 @@ const INITIAL_FIELD_VALUES = { username: '', password: '' };
 function LoginForm() {
   const navigate = useNavigate();
 
-  const [auth, setAuth] = useAuth();
+  const [auth, _, login] = useAuth();
 
   const [{ loading, error }, requestToken] = useApiAxios(
     {
@@ -32,8 +32,7 @@ function LoginForm() {
         response.data;
       // TODO: access/refresh token을 브라우저 어딘가에 저장해야 합니다.
       // 저장해서 페이지 새로고침이 발생하더라도 그 token이 유실되지 않아야 합니다.
-      setAuth({
-        isLoggendIn: true,
+      login({
         access,
         refresh,
         username,
@@ -48,7 +47,7 @@ function LoginForm() {
       console.log('last_name:', last_name);
 
       // 인증 후, 이동할 주소를 지정합니다.
-      //   navigate('/');
+      navigate('/');
     });
   };
 
